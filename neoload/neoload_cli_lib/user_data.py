@@ -144,6 +144,9 @@ class UserData:
     def get_url(self):
         return self.url
 
+    def get_v4_url(self):
+        return "https://assil-api-v4-nlweb-stacks.apps.rosa.shared-neoload.16y4.p3.openshiftapps.com"
+
     def get_frontend_url(self):
         return self.metadata['frontend url']
 

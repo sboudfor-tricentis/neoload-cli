@@ -90,8 +90,17 @@ def get(endpoint: str, params=None):
     return __handle_error(get_raw(endpoint, params)).json()
 
 
+def get_v4(endpoint: str, params=None):
+    return __handle_error(get_raw_v4(endpoint, params)).json()
+
+
 def get_raw(endpoint: str, params=None):
     return http.get(__create_url(endpoint), params=params, headers=__create_additional_headers(),
+                    verify=user_data.get_ssl_cert())
+
+
+def get_raw_v4(endpoint: str, params=None):
+    return http.get(__create_v4_url(endpoint), params=params, headers=__create_additional_headers(),
                     verify=user_data.get_ssl_cert())
 
 
@@ -166,6 +175,10 @@ def delete(endpoint: str):
 
 def __create_url(endpoint: str):
     return urlparse.urljoin(user_data.get_user_data().get_url(), endpoint)
+
+
+def __create_v4_url(endpoint: str):
+    return urlparse.urljoin(user_data.get_user_data().get_v4_url(), endpoint)
 
 
 def __handle_error(response):
